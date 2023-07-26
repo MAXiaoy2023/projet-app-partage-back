@@ -1,0 +1,1 @@
+Un projet de partage d'objet, j'ai utilisé symfony avec l'ORM Doctrine pour gérer la couche data afin d'approfondir mes connaissances.
