@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: AdLenderRepository::class)]
 class AdLender
@@ -40,9 +41,12 @@ class AdLender
     #[ORM\ManyToOne(inversedBy: 'userAd', fetch:'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
+    #[Ignore]
     #[ORM\OneToMany(mappedBy: 'adLender', targetEntity: OrderBorrower::class, orphanRemoval: true)]
     private Collection $adWithOrder;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adKeywords = null;
 
     public function __construct()
     {
@@ -176,6 +180,18 @@ class AdLender
                 $adWithOrder->setAdLender(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdKeywords(): ?string
+    {
+        return $this->adKeywords;
+    }
+
+    public function setAdKeywords(string $adKeywords): static
+    {
+        $this->adKeywords = $adKeywords;
 
         return $this;
     }

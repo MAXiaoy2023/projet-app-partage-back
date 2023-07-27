@@ -30,7 +30,7 @@ class OrderBorrower
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adWithOrder')]
+    #[ORM\ManyToOne(inversedBy: 'adWithOrder', fetch:'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?AdLender $adLender = null;
 
