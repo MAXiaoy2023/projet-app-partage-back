@@ -22,6 +22,7 @@ class AdLenderController extends AbstractController {
         return $this->json($this->repo->findAll());
     }
 
+
     #[Route('/{id}', methods:'GET')]
     public function one(AdLender $adLender) {
         return $this->json($adLender);
@@ -29,7 +30,7 @@ class AdLenderController extends AbstractController {
 
 
 
-   #[Route(methods:'POST')]
+   #[Route('/{id}', methods:'POST')]
    public function add(User $user, Request $request, SerializerInterface $serializer) : JsonResponse {
     try {
         $adLender = $serializer->deserialize($request->getContent(), AdLender::class, 'json');
